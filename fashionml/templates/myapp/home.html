@@ -1,0 +1,135 @@
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<html>
+    <head lang="en">
+    <script type="text/javascript" src="https://cdn.shopify.com/s/assets/external/app.js"></script>
+ 
+    <script type="text/javascript">
+        ShopifyApp.init({
+            apiKey: '{{ SHOPIFY_APP_API_KEY }}',
+            shopOrigin: 'https://{{ user.myshopify_domain }}'
+        });
+        ShopifyApp.ready(function() {
+            ShopifyApp.Bar.initialize({
+                title: '{{ SHOPIFY_APP_NAME }}',
+                buttons: {}
+            });
+        });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+
+
+    </script>
+    </head>
+    <body style="width:1000px;padding-left: 2cm;">
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+<h1>Fashion  +  Machine Learning</h1>
+<p>This is a simple app that demonstrates how machine learning and AI can be used to identify the products added by store owners.</p>
+<p> The machine learning algorithm will identify the image and give recommendations for tags, title and descriptions that can be used to create w new product
+</p>
+
+<p> Shopify data collected from sales of several stores can be used to identify the trending tags and titles that attracts people the most. The data can feed the machine learning algorith to give better recommendations to the Merchants.
+</p>
+<br>
+<p>
+Superviosed machine learning has been used with over 80,000 images to train the AI models. 14 clothing classes have been identified.
+</p>
+<p><strong> Can be tested with any picture from Google or Wikimedia or any camera pictures! </strong></p>
+<p> This apps currently only works with the following pieces:</p>
+
+<ul style="columns: 2;-webkit-columns: 2;-moz-columns: 2; width:500px">
+<li>shortdress</li>
+<li>shirt</li>
+<li>blouses</li>
+<li>coat</li>
+<li>sweater</li>
+<li>cloak</li>
+<li>uniform</li>
+<li>jacket</li>
+<li>tshirt</li>
+<li>longdress</li>
+<li>suit</li>
+<li>sportshirt</li>
+<li>robe</li>
+<li>vest</li>
+</ul>
+
+<strong>*Pictures of people wearing clothing pieces can be used as well*</strong>
+<hr>
+{# Display a form #}
+<form id="form" action="{% url 'home' %}" method="post" class="form" enctype="multipart/form-data">
+  {% csrf_token %}
+  <p><strong> Upload any JPG file of a cothing item.</strong></p>
+    <label class="btn btn-primary">
+        Upload Image <input id="id_image" type="file" name="image" style="display: none;">
+    </label>
+</form>
+
+
+
+<div id="column-content" style="display: none;">
+
+  <img id="loader" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"  style="margin: 0 auto; width:300px">
+  <span><strong>Please wait...</strong>
+    Running Machine Learning Classification Algorithm.</span>
+</div>
+<style>
+#column-content {
+  display: inline-block;
+}
+img {
+  vertical-align: middle;
+}
+span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* for visual purposes */
+#column-content {
+  position: relative;
+}
+</style>
+
+
+
+{% if uploaded_file_url %}
+    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+    <img src="{{ uploaded_file_url }}" alt="Smiley face" height="100" width="100">
+{% endif %}
+<hr>
+<div>
+
+
+
+
+<!-- 
+<form id="form" action="{% url 'home' %}" method="post" class="form" enctype="multipart/form-data">
+  {% csrf_token %}
+  <p><strong> Upload any JPG file of a cothing item.</strong></p>
+    <label class="btn btn-primary">
+        Upload Image <input id="id_image" type="file" name="image" style="display: none;">
+    </label>
+</form> -->
+
+
+
+
+{# Read the documentation for more information #}
+<!-- <script>
+    document.getElementById("id_image").onchange = function() {
+    document.getElementById("form").submit();
+};
+</script> -->
+<script>
+$('#id_image').change(function() {
+    $('#column-content').show();
+    $('#form').submit();
+});
+</script>
+
+    </body>
+</html>

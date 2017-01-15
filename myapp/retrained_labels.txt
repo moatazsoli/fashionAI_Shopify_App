@@ -1,0 +1,14 @@
+vest
+shirt
+blouses
+coat
+sweater
+cloak
+uniform
+jacket
+tshirt
+longdress
+suit
+sportshirt
+robe
+shortdress

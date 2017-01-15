@@ -1,0 +1,71 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{# Display a form #}
+
+
+</script>
+<!-- {{tag}}
+{{desc}} -->
+<br>
+<div style="width:1000px;padding-left: 2cm;">
+<form id="form" action="/upload" method="post" class="form" enctype="multipart/form-data" >
+  {% csrf_token %}
+  
+  <h4>Add New Product</h4>
+  <br>
+
+  <input type="hidden" name="imagepath" value="{{ imagepath }}" />
+  <div class="form-group">
+    <label for="title">Title: </label>
+    <input id="title" class="form-control" type="text" name="title" value="{{ title }}">
+    </div>
+    <div class="form-group">
+    <label for="description">Description: </label>
+    <input id="description" class="form-control" type="text" name="description" value="{{ description }}">
+    </div>
+    <div class="form-group">
+    <label for="tags">Tags: </label>
+    <input id="tags" type="text" class="form-control" name="tags" value="{{ tags }}">
+    </div>
+    <div class="form-group">
+    <label>Image: </label>
+    <br>
+    <img src="{{ uploaded_file_url }}" alt="" height="100" width="100">
+    </div>
+
+  {% buttons %}
+        <button type="action" class="btn btn-primary" onclick="history.go(-1);">
+            {% bootstrap_icon "remove" %} Cancel
+        </button>
+        <button type="submit" class="btn btn-primary">
+            {% bootstrap_icon "star" %} Submit
+        </button>
+        
+    {% endbuttons %}
+
+</form>
+<hr>
+{% if score_list_map %}
+
+<h5> Image Predictions Machine learning Score</h5>
+<ul style="columns: 2;-webkit-columns: 2;-moz-columns: 2; width:500px">
+    {% for a in score_list_map %}
+      <li>{{a.human_string}} (score ={{ a.score }})</li>
+    {% endfor %}
+</ul>
+{% endif %}
+</div>
+
+
+
+
+
+{# Read the documentation for more information #}

@@ -1,0 +1,15 @@
+Django==1.10.5
+django-bootstrap3==8.1.0
+django-shopify-auth==0.4.8
+funcsigs==1.0.2
+mock==2.0.0
+numpy==1.11.3
+olefile==0.44
+pbr==1.10.0
+Pillow==4.0.0
+protobuf==3.1.0.post1
+pyactiveresource==2.1.2
+PyYAML==3.12
+ShopifyAPI==2.1.8
+six==1.10.0
+tensorflow==0.12.1
